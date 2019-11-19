@@ -12,10 +12,12 @@
   "license": "ISC",
   "dependencies": {
     "assert": "^2.0.0",
+    "body-parser": "latest",
     "express": "^4.17.1",
     "mocha": "^6.2.2",
     "mongoose": "^5.7.11",
+    "neo4j-driver": "^1.7.6",
     "nodemon": "^1.19.4",
-    "body-parser": "latest"
+    "tracer": "^1.0.1"
   }
 }
