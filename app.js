@@ -8,7 +8,7 @@ const port  = process.env.PORT || 3000;
 
 mongoose.Promise = global.Promise;
 //connecten met de mongodb
-mongoose.connect('mongodb://localhost:27017/studdit', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+mongoose.connect('mongodb+srv://Studdit:Mouaouia-881998@studdit-project-yjang.mongodb.net/studdit', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(() => {
         console.log('MongoDB connection established')
     })

@@ -6,11 +6,15 @@ const ThreadsController = require('../controllers/threads.controller');
 //Hier komen te routes/ endpoints:
 //callback ()=>{...};
 module.exports = (app) => {
-//todo: User routes:
+    //todo: User routes:
     app.post('/api/users', UsersController.createUser);
     app.put('/api/users', UsersController.updateUser);
-//todo: Comment routes:
+    app.delete('/api/users', UsersController.deleteUser);
 
-//todo: Thread routes:
+    //todo: Friendship routes:
+    
+    //todo: Comment routes:
+
+    //todo: Thread routes:
 
 };

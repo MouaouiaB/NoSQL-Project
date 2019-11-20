@@ -33,7 +33,7 @@ module.exports = {
             // dit is de querie die een user toevoegd aan mongodb
             .then(() => {
                 session.run(
-                    'CREATE (a:User { userName: $userName, password: $password }) RETURN a',
+                    'CREATE (u:User { userName: $userName, password: $password }) RETURN u',
                     {
                         userName: req.body.userName,
                         password: req.body.password
@@ -54,10 +54,12 @@ module.exports = {
         const user = req.body;
         const newPassword = req.body.newPassword;
 
+        logger.info("updateUser was called.");
+
         User.findOne({ userName: user.userName, password: user.currentPassword })
             .then(user => {
                 user.set('password', newPassword);
-                user.save()
+                user.save();
                 res.status(200).send({
                     message: "User successfully updated.",
                     userName: user.userName,
@@ -66,7 +68,9 @@ module.exports = {
             })
             .catch(() =>{
                 res.status(401).send({
-                    error: 'The current password is incorrect.' });
+                    status: 401,
+                    error: 'The current password is incorrect.'
+                });
             })
             .then(() => {
                 session.run(
@@ -77,11 +81,48 @@ module.exports = {
                         newPassword: user.newPassword
                     }
                 );
-                logger.info("New user has been updated");
+                logger.info("New user has been deleted");
                 session.close()
             })
             .catch(error =>{
                 //error message
+            });
+    },
+
+    deleteUser(req, res, next) {
+        let session = driver.session();
+        const user = req.body;
+
+        logger.info("deleteUser was called.");
+
+
+        User.findOne({ userName: user.userName, password: user.password })
+            .then((user)=>{
+                user.remove();
+                res.status(200).send({
+                    Message: `The user '${user.userName}' is deleted`
+                });
+            })
+            .catch((user) => {
+                res.status(401).send({
+                    status: 401,
+                    error: 'The entered password is incorrect'
+                });
+            })
+            .then(user => {
+                session.run(
+                    'MATCH (u:User { userName: $userName, password: $password }) -[f:IS_FRIENDS_WITH]-() DELETE u, f',
+                    {
+                        userName: req.body.userName,
+                        password: req.body.password
+                    }
+                );
+                logger.info("New user has been deleted");
+                session.close()
+            })
+            .catch(() => {
+                session.close();
+                next();
             });
     },
 
