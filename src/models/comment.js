@@ -6,6 +6,6 @@ const CommentSchema = new Schema ({
     content: {type: String, required: true}
 });
 // connect/ koppel met mongoose, zodat mongo kan checken of comment al bestaat, als niet dan wordt er een collection gemaakt van comments door gebruik te maken van de schema:
-const Comment = mongoose.model('comment', CommentSchema);
+//const Comment = mongoose.model('comment', CommentSchema);
 // Export model/ schema:
-module.exports = Comment;
+module.exports = CommentSchema;
