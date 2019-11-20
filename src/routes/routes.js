@@ -1,13 +1,14 @@
 //import de controllers:
-const UserController = require('../controllers/users.controller');
-const CommentController = require('../controllers/comments.controller');
-const ThreadController = require('../controllers/threads.controller');
+const UsersController = require('../controllers/users.controller');
+const CommentsController = require('../controllers/comments.controller');
+const ThreadsController = require('../controllers/threads.controller');
 
 //Hier komen te routes/ endpoints:
 //callback ()=>{...};
 module.exports = (app) => {
 //todo: User routes:
-
+    app.post('/api/users', UsersController.createUser);
+    app.put('/api/users', UsersController.updateUser);
 //todo: Comment routes:
 
 //todo: Thread routes:
