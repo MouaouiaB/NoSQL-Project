@@ -8,6 +8,7 @@ const ThreadsController = require('../controllers/threads.controller');
 module.exports = (app) => {
 //todo: User routes:
     app.post('/api/users', UsersController.createUser);
+    app.put('/api/users', UsersController.updateUser);
 //todo: Comment routes:
 
 //todo: Thread routes:
