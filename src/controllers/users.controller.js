@@ -12,34 +12,41 @@ module.exports = {
 
             User.findOne({userName: req.body.userName})
                 .then((user) => {
-                    // als de username van de nieuwe user al bestaat (dus niet unique is) dan:
-                    logger.info("username has been used")
-                    res.send({
-                        Message: `Username ${user.userName} is already taken`
-                    });
+                    //als de username van de nieuwe user unique is dan:
+                    if (user === null || user === undefined){
+                        logger.info('user is null');
+                        // dit is de querie die een user toevoegd aan no4j
+                        session.run(
+                            'CREATE (u:User { userName: $userName, password: $password }) RETURN u',
+                            {
+                                userName: req.body.userName,
+                                password: req.body.password
+                            }
+                        );
+                        logger.info("New user has been created")
+                        session.close();
+                        //  // dit is hoe de user wordt toevoegd aan mongodb
+                        return User.create(NewUser)
+                        // als de username van de nieuwe user al bestaat (dus niet unique is) dan:
+                    }else{
+                        logger.info("username is al gebruikt")
+                        throw new Error('username is al gebruikt ')
+                    }
+                })
+                .then((user)=>{
+                    logger.info('print the user', user)
+                    res.status(200).json({
+                        message: `De user ${user.userName} is toegevoed`
+                    })
                 })
                 // dit is de response dit we krijgen als een user toegevoegd is
-                .catch(() =>{
-                res.status(200).send({
-                    message: "User successfully created.",
-                    userName: NewUser.userName,
-                    password: NewUser.password
+                .catch((error) =>{
+                    logger.error('error: ', error)
+                    res.status(500).json({
+                        message: 'username is al gebruikt',
+                        error: 'Er ging iets mis!!'
                 });
             });
-            //als de username van de nieuwe user unique is dan:
-            User.create(NewUser)
-            // dit is de querie die een user toevoegd aan mongodb
-            .then(() => {
-                session.run(
-                    'CREATE (u:User { userName: $userName, password: $password }) RETURN u',
-                    {
-                        userName: req.body.userName,
-                        password: req.body.password
-                    }
-                    );
-                logger.info("New user has been created")
-                session.close();
-            })
         } catch(e) {
             return res.status(422).send({
                 message: e.toString()
