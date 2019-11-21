@@ -6,8 +6,8 @@ module.exports = {
     //het toevoegen van vriendschap door 2 usernames
     createFriendship(req, res, next) {
         let session = driver.session();
-        const userName1 = req.body.userName;
-        const userName2 = req.body.userName;
+        const userName1 = req.body.userName1;
+        const userName2 = req.body.userName2;
         const  user1 = User.findOne({user: userName1})
         const  user2 = User.findOne({user: userName2})
 
@@ -41,7 +41,12 @@ module.exports = {
     //het verwijderen van vriendschap door 2 usernames
     deleteFriendship(req, res, next) {
         let session = driver.session();
+        const userName1 = req.body.userName1;
+        const userName2 = req.body.userName2;
+        const  user1 = User.findOne({user: userName1});
+        const  user2 = User.findOne({user: userName2});
 
+        Promise.all([user1, user2])
         session.run(
             'MATCH (:User {userName: $userName1})-[r:IS_FRIENDS_WITH]-(:User {userName: $userName2}) DETACH DELETE r',
             {
