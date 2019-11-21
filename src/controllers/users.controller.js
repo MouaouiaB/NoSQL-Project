@@ -2,8 +2,6 @@ const User = require('../models/user');
 const driver = require('../../neo4jdriver');
 const logger = require("../config/appconfig").logger;
 
-
-
 module.exports = {
     createUser(req, res, next) {
         try {

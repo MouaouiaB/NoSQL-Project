@@ -1,5 +1,6 @@
 //import de controllers:
 const UsersController = require('../controllers/users.controller');
+const FriendshipsController = require('../controllers/friendships.controller');
 const CommentsController = require('../controllers/comments.controller');
 const ThreadsController = require('../controllers/threads.controller');
 
@@ -12,7 +13,9 @@ module.exports = (app) => {
     app.delete('/api/users', UsersController.deleteUser);
 
     //todo: Friendship routes:
-    
+    app.post('/api/friendships', FriendshipsController.createFriendship);
+    //app.delete('/api/friendships', FriendshipsController.deleteFriendship);
+
     //todo: Comment routes:
 
     //todo: Thread routes:
