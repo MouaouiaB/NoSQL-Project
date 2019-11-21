@@ -5,7 +5,7 @@ const CommentSchema = require('./comment')
 
 const ThreadSchema = new Schema ({
 
-    //threadId: {type: Number, required: true, unique: true},
+    threadid: {type: Number, required: true, unique: true},
     userName: {type: String, required: true},
     title: {type: String, required: true},
     content: {type: String, required: true}, 

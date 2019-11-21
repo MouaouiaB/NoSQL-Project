@@ -17,11 +17,11 @@ module.exports = (app) => {
     app.delete('/api/friendships', FriendshipsController.deleteFriendship);
 
     //todo: Comment routes:
-    app.post('/api/threads/:threadid/comments', CommentsController.createComment);
+    app.post('/api/threads/:id/comments', CommentsController.createComment);
+    app.delete('/api/threads/:id/comments/:commentid', CommentsController.deleteComment);
 
     //todo: Thread routes:
     app.post('/api/threads', ThreadsController.createThread);
-
     app.get('/api/threads/:id', ThreadsController.getThreadById);
     app.get('/api/threads', ThreadsController.getAllThreads);
     app.put('/api/threads/:id', ThreadsController.editThread);

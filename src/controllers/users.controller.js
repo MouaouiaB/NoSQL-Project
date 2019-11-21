@@ -117,7 +117,7 @@ module.exports = {
             })
             .then(user => {
                 session.run(
-                    'MATCH (u:User { userName: $userName, password: $password }) -[f:IS_FRIENDS_WITH]-() DELETE u, f',
+                    'MATCH (u:User { userName: $userName, password: $password })  DELETE u',
                     {
                         userName: req.body.userName,
                         password: req.body.password
