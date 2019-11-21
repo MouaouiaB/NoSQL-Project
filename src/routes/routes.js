@@ -13,12 +13,12 @@ module.exports = (app) => {
     app.delete('/api/users', UsersController.deleteUser);
 
     //todo: Friendship routes:
-    //app.post('/api/friendships', FriendshipsController.createFriendship);
-    //app.delete('/api/friendships', FriendshipsController.deleteFriendship);
+    app.post('/api/friendships', FriendshipsController.createFriendship);
+    app.delete('/api/friendships', FriendshipsController.deleteFriendship);
 
     //todo: Comment routes:
-    app.post('/api/comments/:id', CommentsController.createComment);
-    app.delete('/api/comments/:threadId', CommentsController.deleteComment);
+    app.post('/api/threads/:id/comments', CommentsController.createComment);
+    app.delete('/api/threads/:id/comments/:commentid', CommentsController.deleteComment);
 
     //todo: Thread routes:
     app.post('/api/threads', ThreadsController.createThread);
