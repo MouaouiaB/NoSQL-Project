@@ -14,10 +14,17 @@ module.exports = (app) => {
 
     //todo: Friendship routes:
     app.post('/api/friendships', FriendshipsController.createFriendship);
-    //app.delete('/api/friendships', FriendshipsController.deleteFriendship);
+    app.delete('/api/friendships', FriendshipsController.deleteFriendship);
 
     //todo: Comment routes:
+    app.post('/api/threads/:threadid/comments', CommentsController.createComment);
 
     //todo: Thread routes:
+    app.post('/api/threads', ThreadsController.createThread);
+    app.get('/api/threads/:threadid', ThreadsController.getThreadById);
+    app.get('/api/threads', ThreadsController.getAllThreads);
+    app.put('/api/threads/:threadid', ThreadsController.editThread);
+    app.delete('/api/users/:userid/threads/:threadid', ThreadsController.deleteThread);
+
 
 };
