@@ -19,7 +19,7 @@ module.exports = {
             .then(thread => {
                 if(thread === null){
                     res.status(404).send({ Error: 'Thread does not exist'});
-                }
+                }   
                 else{
                     items ={
                     _id: thread._id,
