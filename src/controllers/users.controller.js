@@ -22,11 +22,11 @@ module.exports = {
                 })
                 // dit is de response dit we krijgen als een user toegevoegd is
                 .catch(() =>{
-                res.status(200).send({
+                    res.status(200).send({
                     message: "User successfully created.",
                     userName: NewUser.userName,
                     password: NewUser.password
-                });
+                })
             });
             //als de username van de nieuwe user unique is dan:
             User.create(NewUser)
@@ -85,7 +85,7 @@ module.exports = {
                 session.close()
             })
             .catch(error =>{
-                //error message
+                logger(error.toString());
             });
     },
 

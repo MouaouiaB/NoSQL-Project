@@ -16,5 +16,10 @@ module.exports = (app) => {
     //todo: Comment routes:
 
     //todo: Thread routes:
+    app.post('/api/threads', ThreadsController.createThread);
+    app.get('/api/threads/:id', ThreadsController.getThreadById);
+    app.get('/api/threads', ThreadsController.getAllThreads);
+    app.put('/api/threads/:id', ThreadsController.editThread);
+    app.delete('/api/threads/:id', ThreadsController.deleteThread)
 
 };

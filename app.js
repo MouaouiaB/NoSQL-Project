@@ -27,4 +27,9 @@ app.use((err, req, res, next) => {
 
 app.listen(port, '0.0.0.0', () => console.log(`Welcome to the app, use port ${port} for access.`));
 
+process.on('unhandledRejection', (reason, p) => {
+  console.log('Unhandled Rejection at: Promise', p, 'reason:', reason.stack);
+  // application specific logging, throwing an error, or other logic here
+});
+
 module.exports = app;
