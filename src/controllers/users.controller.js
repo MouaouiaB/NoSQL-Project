@@ -46,6 +46,7 @@ module.exports = {
                         message: 'username is al gebruikt',
                         error: 'Er ging iets mis!!'
                 });
+
             });
         } catch(e) {
             return res.status(422).send({
@@ -90,7 +91,7 @@ module.exports = {
                 session.close()
             })
             .catch(error =>{
-                //error message
+                logger(error.toString());
             });
     },
 

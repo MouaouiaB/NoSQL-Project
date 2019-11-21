@@ -4,12 +4,13 @@ const Schema = mongoose.Schema;
 const CommentSchema = require('./comment')
 
 const ThreadSchema = new Schema ({
+
     //threadId: {type: Number, required: true, unique: true},
     userName: {type: String, required: true},
     title: {type: String, required: true},
-    content: {type: String, required: true},
-    upVote: [{ type: String}],
-    downVote: [{ type: String}],
+    content: {type: String, required: true}, 
+    upVote: { type: Number},
+    downVote: { type: Number},
     comments:[{CommentSchema}]
     //comments:[{type: Schema.Types.ObjectId, ref: 'Comment'}]
 });
