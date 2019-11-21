@@ -38,8 +38,8 @@ module.exports = {
             })
     },
 
-
-        deleteFriendship(req, res, next) {
+    //het verwijderen van vriendschap door 2 usernames
+    deleteFriendship(req, res, next) {
         let session = driver.session();
 
         session.run(
